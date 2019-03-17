@@ -1,0 +1,261 @@
+
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin: 0px;
+	padding: 0px
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+/* Global Styles */
+input[type=text], input[type=date], input[type=number], textarea, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+div {
+    border-radius: 5px;
+    background-color: #D7EFF8;
+}
+
+body {
+  color: #025A7B;
+  font-family: "Arial", Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  overflow:scroll; /* for menu */
+}
+
+.header {
+  color: #025A7B;
+  font-family: "Arial", Verdana, sans-serif;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  font-size: .75em;
+  font-style: italic;
+}
+.container {
+  height: 100%;
+  padding:10px;
+  margin:auto;
+}
+
+.main {
+  height: calc(100% - 60px);
+}
+
+.content {
+  height: 100%;
+}
+
+label {
+  color: #9a929e;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+/* Radio Styles */
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+input[type=radio]:checked + label {
+  background: #025A7B;
+}
+
+label + input[type=radio] + label {
+  border-left: solid 3px #675f6b;
+}
+
+.radio-group {
+  border: solid 3px #025A7B;
+  display: inline-block;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* button styles */
+input[type=submit], input[type=button] {
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  	font-family: "Arial", Verdana, sans-serif;
+  	font-size: 16px;
+  	font-weight: bold;
+}
+
+input[type=submit] {
+  background-color: #025A7B;
+  width: 100%;
+}
+
+input[type=button] {
+  background-color: #4E8A9F;
+  width: 100%;
+}
+
+input[type=submit]:hover {
+    background-color: #014964;
+}
+
+input[type=button]:hover {
+    background-color: #427587;
+}
+
+
+
+
+/* Table Styles 
+
+table{
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tbl-header{
+  border: 1px solid #025A7B;
+  background-color: #C9E4EE;
+ }
+.tbl-content{
+  height: calc(100vh - 210px);
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid #025A7B;
+  background-color: #BBD5DF;
+  display:block;
+}
+
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  border-bottom: solid 1px #025A7B;
+}
+*/
+
+
+
+/* Accordion Styles */
+.accordion {
+    background-color: #025A7B;
+    color: white;
+    font-family: "Arial", Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.open, .accordion:hover {
+    background-color: #014964;
+}
+
+.panel {
+    padding: 0 18px;
+    overflow: hidden;
+    height: 0;
+    transition: height 0.2s ease-out;
+}
+
+.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    color: white;
+    font-size: 13px;
+    float: right;
+    margin-left: 5px;
+}
+
+.open:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    color: white;
+}
+
+
+/* Card styles */
+/*
+.card {
+  background-color: white;
+  width: 70%;
+  padding: 10px;
+  text-align: center;
+  border: solid;
+  border-color: #025A7B;
+  color: #025A7B;
+  font-size: 20px;
+}*/
+
+
+.cards {
+  text-align: center;
+}
+.card, .flippedcard{
+  display: inline-block;
+  height: 400px;
+  margin: 10px;
+  border: solid;
+  border-color: #025A7B;
+  border-radius: 8px;
+  background-color: white;
+  @media (max-width: 700px) {
+    width: 80%;
+  }
+
+  @media (max-height: 400px) {
+    height: 40%;
+  }
+}
+
+.card {
+  width: 800px;
+  font-size: 30px;
+}
+
+.flippedcard {
+  width: 800px;
+  text-align: left;
+  padding: 30px;
+  font-size: 20px;
+}
+
+
+.card code {
+  font-size: 20px;
+}
+
+
+.grid-container {
+  /*display: grid;*/
+  padding: 10px;
+}
+

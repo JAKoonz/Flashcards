@@ -1,0 +1,26 @@
+- Fix grid-container class so it's a responsive grid (checkboxes move to next line on smaller windows)
+X clean up existing html/css/js
+X write JS to select all
+X write JS to deselect all
+X add html for bottom half
+X write JS to search
+	- random card (filtered by choices in top accordion) - https://stackoverflow.com/questions/19693256/javascript-display-random-images
+	- buttons for "Flip" and "Next"
+X write JS for Flip
+- make buttons appear side by side
+- add some cards!
+X fix flipping bug
+
+
+nextCard():
+X only show cards which match filters
+X hide flippedCard
+X save shown ID to global variable
+- ignore cards which have already been shown? or maybe mark ones you feel done with? or don't repeat until all have been shown?
+
+
+
+
+X flipCard():
+- hide card
+- hide all flippedCards except for one with ID corresponding to global variable

@@ -1,0 +1,219 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <title>Programming Flashcards</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+  </head>
+  <body>
+      <div id="container" class="container">
+        <div id="header" class="header">
+          <h1>Programming Flashcards
+        </div><!-- .header -->
+        <div class="main">
+            <div class="content">
+
+                <button class="accordion" onclick="toggleAccordion(this);">Search Criteria</button>
+                <div class="panel">
+                  <form action="#" method="get">
+                    <div class="grid-container">
+                      <input type="checkbox" name="tags" value="sql"><label for="sql">SQL</label><br>
+                      <input type="checkbox" name="tags" value="js"><label for="js">JS</label><br>
+                      <input type="checkbox" name="tags" value="python"><label for="python">Python</label><br>
+                      <input type="checkbox" name="tags" value="performance"><label for="performance">Performance</label><br>
+                      <input type="checkbox" name="tags" value="terminology"><label for="terminology">Terminology</label><br>
+                    </div>
+                    
+                    <div>
+                      <input type="button" value="Select All" onclick="selectAll(this.form);">
+                    </div>
+                    <div>
+                      <input type="button" value="Clear" onclick="clearForm(this.form);">
+                    </div>
+                    <div>
+                      <input type="button" value="Search" onclick="nextCard();">
+                    </div>
+                    
+                  </form>
+                </div>
+
+                <div class="cards">
+
+                  <div id="card0" class="card sql">
+                  <br><br><br><br>How are wildcard characters used in SQL LIKE clauses?
+                  </div>
+
+                  <div id="flippedcard0" class="flippedcard">
+                    <ul>
+                      <li>% Represents zero or more characters. <br> Ex: bl% finds bl, black, blue, and blob</li>
+                      <li>_ Represents a single character.<br> Ex: h_t finds hot, hat, and hit</li>
+                      <li>[] Represents any single character within the brackets.<br> Ex: h[oa]t finds hot and hat, but not hit</li>
+                      <li>^ Represents any character not in the brackets.<br> Ex: h[^oa]t finds hit, but not hot and hat</li>
+                      <li>- Represents a range of characters.<br> Ex: c[a-d]t finds cat, cbt, cct, and cdt</li>
+                    </ul>
+                  </div>
+
+                  <div id="card1" class="card sql performance">
+                  How can we make this query faster? </br>
+                  <code>SELECT order_id FROM orders </br>WHERE DATEDIFF(orders.pickup_date, '2017-03-01') < 0;</code>
+                  </div>
+
+                  <div id="flippedcard1" class="flippedcard">
+                    <ol>
+                      <li>Add an index to the <code>orders.pickup_date</code> property. Tradeoff: This will decrease the performance of Inserts.</li><br>
+                      <li>Don't use a function in the WHERE clause - functions evaluate for every row in a table without using the index. <br><br>
+                        <code>SELECT order_id FROM orders </br>WHERE orders.pickup_date <'2017-03-01';</code></li>
+                    </ol>
+                  </div>
+
+                  <div id="card2" class="card sql">
+                    The following query retrieves the entry with the highest order count from a table of orders. How could we retrieve the entry with the nth highest order count? <br><br>
+                    <code>SELECT MAX(order_count) FROM customer_order_counts;</code>
+                  </div>
+
+                  <div id="flippedcard2" class="flippedcard">
+                    Most SQL databases have some form of a LIMIT function, where you specify the number of items you'd like to return, and the offset, or number of items you'd like to skip.<br> 
+                    <code>SELECT MAX(order_count) <br>FROM customer_order_counts <br>LIMIT 1, n-1</code><br><br>
+                    In SQL Server, I THINK the code would be:</br>
+                    <code>SELECT TOP 1 order_count <br>FROM customer_order_counts <br>ORDER BY order_count DESC <br>OFFSET n-1</code>
+                  </div>
+
+                  <div id="card3" class="card sql performance">
+                  How can we make this query faster? </br><br>
+                  <code>SELECT first_name, last_name, street_address, city, zip_code <br>FROM customers
+<br>WHERE first_name LIKE '%sam%' AND city = 'Dover';</code>
+                  </div>
+
+                  <div id="flippedcard3" class="flippedcard">
+                    <ol>
+                      <li>There is no reason to return the city and zip code - we're only looking for people from Dover, so we already know the city and zip code.</li><br>
+                      <li>Question whether the use of '%sam%' is preferable to 'sam%'? If the purpose is to return all people named Sam, Sammy, Samuel, Samantha, etc., then the latter would be much faster since then the query doesn't have to scan entire name of each customer, only the first three letters. However, now people like Rosamond will not be included in the query results, when they would have before.</li>
+                    </ol>
+                  </div>
+
+                  <div id="card4" class="card sql">
+                    <br><br><br><br>Describe all the SQL Joins.
+                  </div>
+
+                  <div id="flippedcard4" class="flippedcard">
+                    <ul>
+                      <li><strong>Inner joins</strong> give only the rows where all the joined tables have related data.</li>
+                      <li><strong>Left outer joins</strong> give all the rows from the first table, but only related rows in the next table.</li>
+                      <li><strong>Right outer joins</strong> include any related rows in the first table, and all the rows in the next table.</li>
+                      <li><strong>Full outer joins</strong> take all the records from every table. Related data are combined like the other joins, but no rows from any table are left out.</li>
+                      <li><strong>Cross or Cartesian joins</strong> give every row from the first table paired with every row in the next table, ignoring any relationship. </li>
+                      <li><strong>Self joins</strong> refer to any join that joins data in the same table (often through a foreign key).</li>
+                    </ul>
+                  </div>
+
+                  <div id="card5" class="card sql security">
+                    <br><br><br><br>What is a SQL injection, and how can it be avoided?
+                  </div>
+
+                  <div id="flippedcard5" class="flippedcard">
+                    A SQL injection is when we use user input to create a dynamic SQL query, and the user enters unexpected values which change the query from being used how it was intended. For instance, if you want the user to enter a phone number to use in a WHERE clause, they might enter "1=1", which would return ALL entries from the table.
+                    <ol>
+                      <li>Use stored procedures or prepared SQL statements. So do not build dynamic SQL.</li>
+                      <li>Validate the type and pattern of input. .</li>
+                      <li>Escape special characters like quotes. (See table 10.1 in the <a href="http://dev.mysql.com/doc/refman/5.7/en/string-literals.html">MySQL String Literals</a> docs for a full list of special character escape sequences.)</li>
+                      <li>Limit database privileges.</li>
+                      <li>Don't display database error messages to users.</li>
+                    </ol>
+                  </div>
+
+                   <div id="card6" class="card sql security">
+                    <br><br>What are SQL Stored Procedures? <br>How are they more secure than dynamic SQL?
+                  </div>
+
+                  <div id="flippedcard6" class="flippedcard">
+                    A stored procedure is prepared code containing SQL queries.
+                    <br>In a stored procedure:
+                    <ul>
+                      <li>Each query is processed more rapidly than a straight query, because the server pre-compiles them.</li>
+                      <li>Each query is only written once, and then executed as often as needed, even across different sessions and connections.</li>
+                      <li>Any query can include programming constructs (such as loops, conditional statements, and error handling) that are either impossible or difficult to write in SQL alone.</li>
+                      <li>More secure than dynamic SQL because an input parameter won't execute as extra raw sql code.</li>
+                    </div>  
+
+                  <div id="card7" class="card sql security">
+                    <br><br>What are SQL Prepared Statements? <br>How are they more secure than dynamic SQL?
+                  </div>
+
+                  <div id="flippedcard7" class="flippedcard">
+                    A prepared statement is a statement which is parsed by the server, and a query plan is made, before it is every executed.
+                    <ul>
+                      <li>On a single session, each prepared statement is processed more rapidly than a straight query.</li>
+                      <li>Queries need to be re-compiled when working across sessions.</li>
+                      <li>Can be called multiple times.</li>
+                      <li>More secure than dynamic SQL because the query and the input data are sent to the database server separately.</li>
+                  </div>
+
+                  <div id="card8" class="card performance terminology">
+                    <br><br><br><br>What is memoization?
+                  </div>
+
+                  <div id="flippedcard8" class="flippedcard">
+                    Memoization ensures that a function doesn't run for the same inputs more than once by keeping a record of the results for the given inputs (usually in a dictionary).
+                  </div>
+
+                  <div id="card9" class="card terminology">
+                    <br>What does it mean if a problem has<br>"overlapping subproblems"?<br><br>What are some common ways<br>to approach such problems?
+                  </div>
+
+                  <div id="flippedcard9" class="flippedcard">
+                    A problem has overlapping subproblems if finding its solution involves solving the same subproblem multiple times.<br>
+                    <strong>Example:</strong> Computing the nth Fibonacci number.<br><br>
+                    These types of problems are commonly approached using either memoization or a bottom-up algorithm.
+                  </div>
+
+                  <div id="card10" class="card terminology">
+                    <br><br><br><br>What is a "bottom-up" algorithm?
+                  </div>
+
+                  <div id="flippedcard10" class="flippedcard">
+                    A bottom-up algorithm is one that avoids recursion by starting at the "bottom" instead of the "top". <br>
+                    <strong>Example:</strong> Consider these two approaches for multiplying the numbers 1-n. <br>
+                    <code><span style="color:#368906;">def recursive_product(n):<br>
+                          &emsp;&emsp;return n * recursive_product(n - 1)<br>
+                        </span>
+                        <span style="color:#641a99;">
+                          def bottum_up_product(n):<br>
+                          &emsp;&emsp;result = 1<br>
+                          &emsp;&emsp;for num in range(1, n + 1):<br>
+                          &emsp;&emsp;&emsp;&emsp;result *= num<br>
+                          &emsp;&emsp;return result<br>
+                        </span>
+                    </code>
+                    The former recursive method builds up a call stack of size O(n), which makes our total memory cost O(n), and makes it vulnerable to a stack overflow error.
+                  </div>
+
+                  <div id="card11" class="card js">
+                  	When would we use an object in JavaScript? 
+                  </div>
+
+                  <div id="flippedcard11" class="flippedcard">
+                  	When managing different data types in a single entity or variable. Objects are the bread and butter of most web applications, as most data is stored in objects, for example 
+                  	<br><code>var blogPost = { title: 'Learning JavaScript', id: 12345 };</code>
+                  </div>
+
+                <div>
+                  <input type="button" value="Flip" onclick="flipCard();">
+                  <input type="button" value="Next" onclick="nextCard();">
+                </div>
+              </div>
+
+
+            </div><!-- .content -->
+        </div><!-- .main -->
+        <div class="footer">
+          <span>Copyright &copy 2019 Jennifer Koonz - All Rights Reserved</span>
+        </div><!-- .footer -->
+      </div><!-- .container -->
+  </body>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="index.js"></script>
+</html>
